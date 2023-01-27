@@ -23,14 +23,13 @@ import Card from './Card.js';
 import {FaHashtag} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import noteContext from '../context/notes/noteContext'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import { useEffect,useState ,useContext} from 'react';
 import NoContent from './NoContent';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import logo from '../assets/helphaven.png'
 
-
-const drawerWidth = 150;
+const drawerWidth = 240;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
@@ -85,51 +84,10 @@ export default function PersistentDrawerLeft() {
     const context=useContext(noteContext);
     const {allArticles,getAllArticles}=context;
     var rand=0
+    var randd=0
+    const params=useParams()
+
     const [articles, setArticles] = useState(null)
-    // const [tags,setTags]=useState([])
-    var randdd=0
-    // useEffect(() => {
-    //     const func=async()=>{
-    //     const response=await fetch(`${host}/api/upload/getallcards`,{
-    //         method: 'GET',
-    //       });
-    //       let json=await response.json();
-    //       console.log(randdd++," ",json)
-    //       setArticles(json);  
-    //       json=json.sort(function (first, second) {
-    //         if (first.priority > second.priority) {
-    //            return -1;
-    //         }
-    //         if (first.priority < second.priority) {
-    //            return 1;
-    //         }
-    //         return 0;
-    //      });
-    //      console.log(randdd++," ",articles)
-
-    //     }
-    //     func();
-    //     // console.log(articles);
-    // },[])
-    // useEffect(()=>{
-    //     const pushTags=async()=>{
-    //         if(articles)
-    //         for(let i=0;i<articles.length;i++)       
-    //         {
-    //             for(let j=0;j<articles[i].tags.length;j++)
-    //             {
-    //                 if(tags.includes(articles[i].tags[j])===false)
-    //                 {
-    //                     setTags( tags => [...tags, articles[i].tags[j]]);
-
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     pushTags();
-    //     console.log(tags);
-    // },[])
-
     const [tags,setTags]=useState([])
     const [tagArticles,settagArticles]=useState([])
 
@@ -141,15 +99,6 @@ export default function PersistentDrawerLeft() {
             method: 'GET',
           });
           const json=await response.json();
-          json.sort(function (first, second) {
-                    if (first.priority > second.priority) {
-                       return -1;
-                    }
-                    if (first.priority < second.priority) {
-                       return 1;
-                    }
-                    return 0;
-                 });
           setArticles(json);  
         }
 
@@ -175,7 +124,35 @@ export default function PersistentDrawerLeft() {
         pushTags();
         // console.log(tags);
     })
-   
+    useEffect(()=>{
+        const pushtagArticles=async()=>{
+            console.log(params.tagId)
+            if(articles)
+            for(let i=0;i<articles.length;i++)       
+            {
+                for(let j=0;j<articles[i].tags.length;j++)
+                {
+                    if(articles[i].tags[j]===params.tagId&&tagArticles.includes(articles[i])===false)
+                    {
+                        var flag=true;
+                        for(let k=0;k<tagArticles.length;k++)
+                        {
+                           if(tagArticles[k]._id===articles[i]._id)
+                            {
+                                flag=false;
+                                break;
+                            }
+                        }
+                        if(flag)
+                        settagArticles( tagArticles => [...tagArticles, articles[i]]);
+                    }
+                }
+            }
+        }
+        pushtagArticles();
+        console.log(tagArticles);
+    })
+
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -231,8 +208,9 @@ export default function PersistentDrawerLeft() {
                         <ListItem key={text} disablePadding>
                             <Link to={`/tag/${text}`} className='card-link2'>
                             <ListItemButton>
-                            <span className='hash-symbol'>#</span>
-                                <ListItemText className='tag-words' primary={text} />
+                              {/* <FaHashtag/> */}
+                                <span className='hash-symbol'>#</span>
+                                <ListItemText  className="tag-words" primary={text}  />
                             </ListItemButton>
                             </Link>
                         </ListItem>
@@ -243,12 +221,14 @@ export default function PersistentDrawerLeft() {
          
 
                 <div className="cards">
-                {articles&&articles.map((element) => {
-    return <div className="d-flex justify-content-center " key={rand++} >
-       <Card {...element}/>
-    </div>
+                {tagArticles&&tagArticles.map((element) => {
+  return <div className="d-flex justify-content-center " key={randd++} >
+     <Card {...element}/>
+  </div>
 })}
-{ !(articles?.length)&&<NoContent/>}
+{
+  !tagArticles&&<NoContent/>
+}
                 </div>
                
             </div>

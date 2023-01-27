@@ -92,14 +92,41 @@ var jwt=require("jsonwebtoken");
             }
             card=await Card.findByIdAndDelete(req.params.id);
             res.json({"success":"Note was successfully deleted",card:card});
-            
-           
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error");
         }
     })
 
+
+     //update user
+ router.post('/updateuser', fetchuser, [
+    body('card_id'),
+   ], async (req, res) => {
+        try {
+            const card_id = req.body.card_id;
+           await User.findOneAndUpdate({
+              _id:req.id
+            },{
+              $push:{
+                likedCards:card_id
+              }
+            })
+            await Card.findOneAndUpdate({
+              _id:card_id
+            },{
+              $inc: { priority: 1}
+            })
+            const user=await User.find({_id:req.id});
+            res.json(user);
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send("Internal Server Error");
+        }
+    })
+  
+
     
+
 
 module.exports=router

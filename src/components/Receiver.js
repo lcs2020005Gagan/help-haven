@@ -6,6 +6,7 @@ import PublishRequest from './PublishRequest'
 import {Link } from "react-router-dom"
 import { useEffect,useState } from 'react'
 import NoContent from './NoContent'
+import logo from '../assets/helphaven.png'
 function Receiver() {
     const host="http://localhost:5000"
 var rand=0
@@ -17,7 +18,7 @@ const [userProfile, setUserProfile] = useState({
   })
     useEffect(() => {
         const getUserProfile=async ()=>{
-              const response=await fetch(`${host}/api/auth/getuser`,{
+              const response=await fetch(`${host}/api/auth/getuser2`,{
                   method: 'POST',
                   headers: {
                     "auth-token": localStorage.getItem('token')
@@ -44,7 +45,7 @@ const [userProfile, setUserProfile] = useState({
                 <PublishRequest/>
             </div>
             <div className="receiver-logo">
-                    <img src="https://images.unsplash.com/photo-1584441405886-bc91be61e56a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hhcml0eSUyMGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" alt="" />
+                    <img src={logo} alt="" />
             </div>
             <div className="switch-to-donor">
                 <Link to="/home">
@@ -60,7 +61,7 @@ const [userProfile, setUserProfile] = useState({
     </div>
 })}
 {
-    !userProfile.cardId&&<NoContent/>
+    !(userProfile?.cardId?.length)&&<NoContent/>
 }
 
             

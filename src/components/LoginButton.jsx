@@ -50,7 +50,6 @@ export default function BasicModal(props) {
     const email=note.email
     const password=note.password
     console.log(email, password);
-    // console.log(note.email," ",note.password)
         const response=await fetch("http://localhost:5000/api/auth/loginuser",{
             method: 'POST',
             headers: {

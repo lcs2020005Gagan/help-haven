@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap');
 
-
+html{
+	/* position: relative; */
+	padding:0;
+	margin:0;
+}
 
 body{
   font-family: "Cascadia Code",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+  
 }
 .logo{
   display: flex;
@@ -154,10 +159,15 @@ top:0;
 }
 
 .navbar img{
-  height:100px;
-  width:100px;
+  height:130px;
+  width:120px;
   border-radius: 50%;
-  
+}
+
+.receiver-logo > img{
+	height:130px;
+	width:120px;
+	border-radius: 50%;
 }
 
 .cards{
@@ -246,6 +256,8 @@ top:0;
 	margin: 20px;
 	overflow: hidden;
 	width: 700px;
+	max-height: 20rem;
+    min-height: 15rem;
 }
 
 .course h6 {
@@ -264,7 +276,11 @@ top:0;
 	background-color: #303030;
 	color: #fff;
 	padding: 30px;
-	max-width :300px;
+	max-width :40%;
+	min-width: 40%;
+	word-wrap: break-word;
+	word-break:normal;
+
 }
 
 .card-preview a {
@@ -279,7 +295,8 @@ top:0;
 .course-info {
 	padding: 30px;
 	position: relative;
-	width: 100%;
+	max-width: 60%;
+	min-width: 60%;
 }
 
 .progress-container {
@@ -544,6 +561,10 @@ top:0;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  position: absolute;
+  bottom:1.4rem;
+  right:2rem;
+  
 }
 
 .receiver{
@@ -551,7 +572,7 @@ top:0;
   padding-right: 4.8rem;
 }
 .receiver-navbar{
-  height: 6.3rem;
+  height: 8rem;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
@@ -562,10 +583,7 @@ top:0;
   z-index: 1;
 }
 
-.receiver-logo img{
-  width: 7rem;
-  height: 6rem;
-}
+
 .receiver-content{
   display: flex;
   padding-top: 3.5rem;
@@ -582,4 +600,115 @@ top:0;
 }
 .publish-request{
   overflow: auto;
+}
+.card-link2{
+	color: rgb(123, 122, 122);
+	font-size: 1.7rem;
+	text-decoration: none;
+}
+
+.card-link2:hover{
+	cursor: pointer;
+	color: rgb(123, 122, 122);
+}
+.card-link:hover{
+	cursor: pointer;
+	color: rgb(123, 122, 122);
+}
+.view-details{
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 100%;
+/* align-items: center; */
+}
+.view-details-title h3{
+	font-size: 1.5rem;
+	color: black;
+}
+.view-details-author
+{
+	color: grey;
+	padding: 0.5rem;
+}
+.view-details-fulldetails{
+	padding: 0.5rem;
+}
+.view-details-pay{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.Tag{
+	padding-left: 4.8rem;
+  padding-right: 4.8rem;
+}
+
+.hash-symbol{
+	margin-right:5px;
+	font-size: large;
+}
+
+.tag-words{
+	color:black;
+}
+
+.MuiDrawer-root > div{
+	width: 15% !important;;
+}
+
+.MuiDrawer-root > div{
+	box-shadow:1px 0px 2px 1px gray;
+}
+
+.footer{
+	height:100px;
+	width:100%;
+	background-color: rgb(62, 62, 62);
+	position:absolute;
+	bottom: 0;
+}
+
+.social-media{
+	color:white;
+	width:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.social-media > svg{
+	margin : 1rem 1.5rem;
+	cursor: pointer;
+}
+
+.social-media> svg:hover{
+	color:rgb(179, 221, 247);
+}
+
+.copyright > span{
+	font-size: 1.3rem;
+	margin-right:5px;
+}
+
+.copyright{
+	width:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:white;
+}
+
+.no-content{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border:2px solid black;
+	padding:5rem;
+	box-shadow: 2px 2px 2px 2px gray;
+
+}
+
+.no-content>h1{
+	font-size: 4.5rem;
 }

@@ -75,7 +75,6 @@ router.post('/getuser',fetchuser,
   async (req, res) => {
     await User.find({_id:req.id})
   .select("-password")
-  .populate("cardId")
   .exec()
   .then(p=>{
       res.status(200).json(p)
@@ -83,6 +82,18 @@ router.post('/getuser',fetchuser,
   .catch(error=>console.log(error));
   });
 
+  //getuser
+router.post('/getuser2',fetchuser,
+async (req, res) => {
+  await User.find({_id:req.id})
+.select("-password")
+.populate("cardId")
+.exec()
+.then(p=>{
+    res.status(200).json(p)
+})
+.catch(error=>console.log(error));
+});
 
 
   //login user
@@ -125,5 +136,6 @@ router.post('/loginuser',
 )
 
 
+  
 
 module.exports=router

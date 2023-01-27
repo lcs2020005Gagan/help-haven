@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Card(props) {
-// const floating_btn = document.querySelector('.floating-btn');
-// const close_btn = document.querySelector('.close-btn');
-// const social_panel_container = document.querySelector('.social-panel-container');
 
-// floating_btn.addEventListener('click', () => {
-// 	social_panel_container.classList.toggle('visible')
-// });
+	const func=async()=>{
+        const response=await fetch(`http://localhost:5000/api/upload/deletecard/${props._id}`,{
+            method: 'DELETE',
+			headers: {
+				'auth-token':localStorage.getItem('token'),
+				'Content-Type': 'application/json',
+			  },
 
-// close_btn.addEventListener('click', () => {
-// 	social_panel_container.classList.remove('visible')
-// });
+          });
+          const json=await response.json();
+		  window.location.reload();
+        }
+
+       
 
 
 
@@ -29,7 +33,7 @@ function Card(props) {
                 {props.briefDescription}
             </div>
             <div className="btn-container">
-                 <button className="button">Delete</button>
+                 <button className="button" onClick={()=>func()}>Delete</button>
             </div>
 			
 		</div>
