@@ -3,6 +3,7 @@ import SignupButton from './SignupButton'
 import LoginButton from './LoginButton'
 import {  useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import logo from '../assets/helphaven.png'
 
 const Home = ()=>{
     const navigate=useNavigate()
